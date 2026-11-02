@@ -1,20 +1,18 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:16-alpine
     container_name: studysmart-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: studysmart
-      POSTGRES_PASSWORD: studysmart_secret
-      POSTGRES_DB: studysmart
+      POSTGRES_USER: ${DB_USER:-studysmart}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-studysmart_dev}
+      POSTGRES_DB: ${DB_NAME:-studysmart}
     ports:
-      - "5433:5432"
+      - "${DB_FORWARD_PORT:-5433}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U studysmart"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-studysmart} -d ${DB_NAME:-studysmart}"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -26,33 +24,34 @@ services:
     container_name: studysmart-backend
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "${APP_PORT:-8080}:8080"
     environment:
       APP_PORT: "8080"
       DB_HOST: db
       DB_PORT: "5432"
-      DB_USER: studysmart
-      DB_PASSWORD: studysmart_secret
-      DB_NAME: studysmart
-      CORS_ORIGIN: "http://localhost:5173"
+      DB_USER: ${DB_USER:-studysmart}
+      DB_PASSWORD: ${DB_PASSWORD:-studysmart_dev}
+      DB_NAME: ${DB_NAME:-studysmart}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
     depends_on:
       db:
         condition: service_healthy
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
       target: dev
     container_name: studysmart-frontend
     restart: unless-stopped
     ports:
-      - "5173:5173"
+      - "${FRONTEND_PORT:-5173}:5173"
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - .:/app
+      - frontend_node_modules:/app/node_modules
     environment:
-      VITE_API_BASE_URL: "http://localhost:8080"
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8080}
 
 volumes:
   pgdata:
+  frontend_node_modules:

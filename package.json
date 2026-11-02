@@ -15,6 +15,7 @@
     "chart.js": "^4.5.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.5",
+    "pinia": "^2.2.6",
     "vee-validate": "^4.15.1",
     "vue": "^3.5.34",
     "vue-router": "^4.6.4",

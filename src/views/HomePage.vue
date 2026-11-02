@@ -22,6 +22,9 @@
             <router-link v-else to="/dashboard" class="rounded-md bg-emerald-400 px-6 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-950/30 transition hover:bg-emerald-300">
               Open Dashboard
             </router-link>
+            <router-link to="/health" class="rounded-md border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Check system health
+            </router-link>
           </div>
         </div>
 

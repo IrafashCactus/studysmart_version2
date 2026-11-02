@@ -1,7 +1,7 @@
-# AGENTS.md — Project Rules for AI Agents
+# AGENTS.md — StudySmart Project Rules for AI Agents
 
 ## Project Overview
-This is a full-stack web application built with **Vue 3** (frontend), **Go/Gin** (backend), and **PostgreSQL** (database), orchestrated via **Docker Compose**.
+This is a full-stack web application built with **Vue 3** (frontend), **Go/Gin** (backend), and **PostgreSQL 16** (database), orchestrated via **Docker Compose**. The existing app and Vite package live at the repository root (`src/`, `package.json`); `frontend/` holds the frontend Dockerfile and Nginx configuration.
 
 ---
 
@@ -31,7 +31,7 @@ This is a full-stack web application built with **Vue 3** (frontend), **Go/Gin**
 ## Coding Standards
 
 ### Vue / Frontend Rules
-1. **Always** use `<script setup>` syntax (Composition API). Never use Options API.
+1. Always use `<script setup>` syntax (Composition API) for Vue components. Do not use Options API.
 2. Use `defineProps` and `defineEmits` for component contracts.
 3. Keep components small and single-responsibility.
 4. Place reusable logic in composables (`src/composables/`).
@@ -65,6 +65,8 @@ This is a full-stack web application built with **Vue 3** (frontend), **Go/Gin**
 6. PostgreSQL data is persisted via a named Docker volume.
 
 ---
+
+The active Vue app lives in the repository root (`src/`, `package.json`, and `vite.config.js`). `frontend/` holds the Dockerfile and Nginx config. The following tree is a general architecture reference, not a list of current files.
 
 ## Directory Structure Reference
 ```

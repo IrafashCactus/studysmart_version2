@@ -1,45 +1,44 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../views/HomePage.vue'
-import UsersPage from '../views/UsersPage.vue'
-import TablePage from '../views/TablePage.vue'
-import LoginPage from '../views/LoginPage.vue'
-import SignupPage from '../views/SignupPage.vue'
 import auth from '../services/auth'
-import DashboardPage from '../views/DashboardPage.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomePage
+    component: () => import('../views/HomePage.vue')
   },
   {
     path: '/users',
     name: 'Users',
-    component: UsersPage,
+    component: () => import('../views/UsersPage.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/table',
     name: 'Table',
-    component: TablePage,
+    component: () => import('../views/TablePage.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/login',
     name: 'Login',
-    component: LoginPage
+    component: () => import('../views/LoginPage.vue')
   },
   {
     path: '/signup',
     name: 'Signup',
-    component: SignupPage
+    component: () => import('../views/SignupPage.vue')
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: DashboardPage,
+    component: () => import('../views/DashboardPage.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/health',
+    name: 'Health',
+    component: () => import('../views/HealthView.vue')
   }
 ]
 
@@ -48,18 +47,18 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const loggedIn = auth.isLoggedIn()
 
   if (to.meta.requiresAuth && !loggedIn) {
-    return next({ name: 'Login' })
+    return { name: 'Login' }
   }
 
   if ((to.name === 'Login' || to.name === 'Signup') && loggedIn) {
-    return next({ name: 'Home' })
+    return { name: 'Home' }
   }
 
-  return next()
+  return true
 })
 
 export default router

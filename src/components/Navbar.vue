@@ -10,6 +10,7 @@
         <router-link to="/" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-emerald-50 hover:text-emerald-700">Home</router-link>
         <router-link to="/#about" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-emerald-50 hover:text-emerald-700">About Us</router-link>
         <router-link to="/#services" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-emerald-50 hover:text-emerald-700">Services</router-link>
+        <router-link to="/health" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-emerald-50 hover:text-emerald-700">System health</router-link>
         <router-link to="/dashboard" class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-emerald-50 hover:text-emerald-700">Dashboard</router-link>
       </div>
 
@@ -20,17 +21,15 @@
   </nav>
 </template>
 
-<script>
+<script setup>
+import { useRouter } from 'vue-router'
 import auth from '../services/auth'
 
-export default {
-  name: 'NavBar',
-  methods: {
-    logout() {
-      auth.logout()
-      this.$router.push('/')
-    },
-  },
+const router = useRouter()
+
+function logout() {
+  auth.logout()
+  router.push('/')
 }
 </script>
 

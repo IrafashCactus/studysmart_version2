@@ -20,7 +20,7 @@ func Load() *Config {
 		DBHost:     getEnv("DB_HOST", "localhost"),
 		DBPort:     getEnv("DB_PORT", "5432"),
 		DBUser:     getEnv("DB_USER", "studysmart"),
-		DBPassword: getEnv("DB_PASSWORD", "studysmart_secret"),
+		DBPassword: getEnv("DB_PASSWORD", ""),
 		DBName:     getEnv("DB_NAME", "studysmart"),
 		CORSOrigin: getEnv("CORS_ORIGIN", "http://localhost:5173"),
 	}

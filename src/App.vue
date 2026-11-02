@@ -1,54 +1,36 @@
   <template>
   <div id="app">
     <Transition name="nav-slide">
-      <NavBar v-if="loggedIn && !isAdminRoute" />
+      <Navbar v-if="loggedIn && !isAdminRoute" />
     </Transition>
 
     <div class="app-shell">
       <DashboardLayout v-if="loggedIn && isAdminRoute">
-        <router-view />
+        <RouterView />
       </DashboardLayout>
-
       <main v-else class="min-w-0 flex-1">
-        <router-view />
+        <RouterView />
       </main>
     </div>
   </div>
 </template>
 
-<script>
-import NavBar from './components/NavBar.vue'
+<script setup>
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import DashboardLayout from './components/DashboardLayout.vue'
+import Navbar from './components/Navbar.vue'
 import auth from './services/auth'
 
-export default {
-  name: 'App',
-  components: {
-    NavBar,
-    DashboardLayout,
-  },
-  data() {
-    return {
-      loggedIn: auth.isLoggedIn(),
-    }
-  },
-  computed: {
-    isAdminRoute() {
-      return ['Dashboard', 'Users', 'Table'].includes(this.$route.name)
-    },
-  },
-  mounted() {
-    window.addEventListener('studySmartAuthChange', this.updateAuthStatus)
-  },
-  beforeUnmount() {
-    window.removeEventListener('studySmartAuthChange', this.updateAuthStatus)
-  },
-  methods: {
-    updateAuthStatus() {
-      this.loggedIn = auth.isLoggedIn()
-    }
-  }
+const route = useRoute()
+const loggedIn = ref(auth.isLoggedIn())
+const isAdminRoute = computed(() => ['Dashboard', 'Users', 'Table'].includes(route.name))
+const updateAuthStatus = () => {
+  loggedIn.value = auth.isLoggedIn()
 }
+
+onMounted(() => window.addEventListener('studySmartAuthChange', updateAuthStatus))
+onUnmounted(() => window.removeEventListener('studySmartAuthChange', updateAuthStatus))
 </script>
 
 <style>

@@ -1,5 +1,15 @@
-# Vue 3 + Vite
+# StudySmart
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+StudySmart uses Vue 3 and Vite for the frontend, Go/Gin for the API, and PostgreSQL 16 for persistence.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Run locally
+
+```sh
+docker compose up --build
+```
+
+Open http://localhost:5173. The API is available at http://localhost:8080, and PostgreSQL is exposed on port 5433. The health endpoint is `GET /api/v1/health`; the frontend health page is `/health`.
+
+Copy `.env.example` to `.env` to customize local settings. `.env` is ignored by Git. Use a unique password outside local development.
+
+The main frontend app lives in `src/`; `frontend/` contains its development/production Dockerfile and Nginx configuration. Backend handlers, services, repositories, and configuration live under `backend/internal/`.
