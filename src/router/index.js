@@ -8,16 +8,38 @@ const routes = [
     component: () => import('../views/HomePage.vue')
   },
   {
-    path: '/users',
-    name: 'Users',
-    component: () => import('../views/UsersPage.vue'),
-    meta: { requiresAuth: true }
+    path: '/feed',
+    name: 'Feed',
+    component: () => import('../views/FeedView.vue')
   },
   {
-    path: '/table',
-    name: 'Table',
-    component: () => import('../views/TablePage.vue'),
-    meta: { requiresAuth: true }
+    path: '/gamification',
+    name: 'Gamification',
+    component: () => import('../views/GamificationView.vue')
+  },
+  {
+    path: '/tutor',
+    name: 'Tutor',
+    component: () => import('../views/TutorView.vue')
+  },
+  {
+    path: '/educator',
+    name: 'Educator',
+    component: () => import('../views/EducatorView.vue')
+  },
+  {
+    path: '/parent',
+    name: 'Parent',
+    component: () => import('../views/ParentView.vue')
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/AdminView.vue')
+  },
+  {
+    path: '/dashboard',
+    redirect: '/admin'
   },
   {
     path: '/login',
@@ -30,15 +52,13 @@ const routes = [
     component: () => import('../views/SignupPage.vue')
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('../views/DashboardPage.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
     path: '/health',
     name: 'Health',
     component: () => import('../views/HealthView.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]
 
@@ -57,8 +77,6 @@ router.beforeEach((to) => {
   if ((to.name === 'Login' || to.name === 'Signup') && loggedIn) {
     return { name: 'Home' }
   }
-
-  return true
 })
 
 export default router

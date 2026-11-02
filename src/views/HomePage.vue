@@ -1,176 +1,169 @@
 <template>
-  <div class="min-h-screen bg-slate-950 text-white">
-    <section class="relative isolate flex min-h-screen items-center overflow-hidden">
-      <img src="../assets/hero.png" alt="" class="absolute inset-0 h-full w-full object-cover opacity-35" />
-      <div class="absolute inset-0 bg-slate-950/70"></div>
+  <div class="min-h-screen bg-slate-950 text-white selection:bg-emerald-500 selection:text-slate-950">
+    <!-- Hero Section -->
+    <section class="relative isolate flex min-h-[85vh] items-center overflow-hidden border-b border-slate-900">
+      <div class="absolute inset-0 bg-gradient-to-b from-emerald-950/20 via-slate-950 to-slate-950 pointer-events-none"></div>
 
-      <div class="relative mx-auto grid w-full max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div class="max-w-3xl">
-          <p class="mb-5 inline-flex rounded-md bg-emerald-400/15 px-4 py-2 text-sm font-semibold text-emerald-200 ring-1 ring-emerald-300/20">
-            StudySmart learning workspace
-          </p>
-          <h1 class="text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">
-            Learn smarter. Manage sharper.
+      <div class="relative mx-auto grid w-full max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div class="max-w-3xl space-y-6">
+          <div class="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-4 py-1.5 text-xs font-bold text-emerald-300">
+            <span>🇷🇼 Rwanda REB Curriculum Grounded</span>
+            <span>•</span>
+            <span>Adaptive EdTech Ecosystem</span>
+          </div>
+
+          <h1 class="text-5xl font-black leading-tight sm:text-6xl lg:text-7xl tracking-tight text-white">
+            Micro-learning. <br />
+            <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+              Gamified & Adaptive.
+            </span>
           </h1>
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-            A focused student-first entry point that stays quiet until you sign in, then opens the tools you need when you ask for the dashboard.
+
+          <p class="max-w-2xl text-base sm:text-lg leading-relaxed text-slate-300">
+            Bite-sized vertical swipe feeds, voice-to-voice AI tutoring, curriculum RAG ingestion, teacher risk radar, and parent accountability monitoring.
           </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <button v-if="!loggedIn" type="button" class="rounded-md bg-emerald-400 px-6 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-950/30 transition hover:bg-emerald-300" @click="showLoginModal = true">
-              Login to Continue
-            </button>
-            <router-link v-else to="/dashboard" class="rounded-md bg-emerald-400 px-6 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-950/30 transition hover:bg-emerald-300">
-              Open Dashboard
+
+          <!-- Core Call to Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <router-link
+              to="/feed"
+              class="rounded-xl bg-emerald-500 hover:bg-emerald-400 px-6 py-3.5 text-sm font-black text-slate-950 shadow-xl shadow-emerald-500/25 transition transform active:scale-95 flex items-center gap-2"
+            >
+              <span>📚</span>
+              <span>Launch Mind-Feed</span>
+              <span>→</span>
             </router-link>
-            <router-link to="/health" class="rounded-md border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-              Check system health
+
+            <router-link
+              to="/gamification"
+              class="rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 px-5 py-3.5 text-sm font-bold text-slate-200 transition flex items-center gap-2"
+            >
+              <span>🔥</span>
+              <span>Quests & XP (7d Streak)</span>
+            </router-link>
+
+            <router-link
+              to="/tutor"
+              class="rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 px-5 py-3.5 text-sm font-bold text-indigo-300 transition flex items-center gap-2"
+            >
+              <span>🤖</span>
+              <span>AI Problem Explainer</span>
             </router-link>
           </div>
         </div>
 
-        <div class="hidden rounded-lg border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur md:block">
-          <div class="grid gap-4">
-            <div class="rounded-md bg-slate-950/70 p-4">
-              <p class="text-sm text-slate-300">Current mode</p>
-              <p class="mt-1 text-2xl font-bold">{{ loggedIn ? 'You got it!' : 'Splash only' }}</p>
+        <!-- Hero Feature Overview Dashboard Card -->
+        <div class="rounded-3xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8 shadow-2xl backdrop-blur-md space-y-6">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Active Ecosystem Modules</span>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="rounded-md bg-white/10 p-4">
-                <p class="text-sm text-slate-300">Student entry</p>
-                <p class="mt-2 text-3xl font-black text-emerald-300">Clean</p>
-              </div>
-              <div class="rounded-md bg-white/10 p-4">
-                <p class="text-sm text-slate-300">Admin tools</p>
-                <p class="mt-2 text-3xl font-black text-cyan-300">Ready</p>
-              </div>
-            </div>
+            <span class="text-xs font-mono text-emerald-400 font-bold">5 Core Engines Live</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <router-link
+              to="/feed"
+              class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-emerald-500/40 transition group"
+            >
+              <span class="text-2xl mb-1 block group-hover:scale-110 transition-transform">📱</span>
+              <h4 class="text-sm font-bold text-white group-hover:text-emerald-400">Mind-Feed Stream</h4>
+              <p class="text-xs text-slate-400 mt-1">Bite-sized flashcards & inline checks</p>
+            </router-link>
+
+            <router-link
+              to="/gamification"
+              class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-amber-500/40 transition group"
+            >
+              <span class="text-2xl mb-1 block group-hover:scale-110 transition-transform">🏆</span>
+              <h4 class="text-sm font-bold text-white group-hover:text-amber-400">Gamification Hub</h4>
+              <p class="text-xs text-slate-400 mt-1">Streaks, Pomodoro timer, Leaderboards</p>
+            </router-link>
+
+            <router-link
+              to="/educator"
+              class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-indigo-500/40 transition group"
+            >
+              <span class="text-2xl mb-1 block group-hover:scale-110 transition-transform">📊</span>
+              <h4 class="text-sm font-bold text-white group-hover:text-indigo-400">Educator Analytics</h4>
+              <p class="text-xs text-slate-400 mt-1">Classroom stats & Student Risk Radar</p>
+            </router-link>
+
+            <router-link
+              to="/admin"
+              class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-cyan-500/40 transition group"
+            >
+              <span class="text-2xl mb-1 block group-hover:scale-110 transition-transform">⚙️</span>
+              <h4 class="text-sm font-bold text-white group-hover:text-cyan-400">RAG Workbench</h4>
+              <p class="text-xs text-slate-400 mt-1">Ingest textbooks & verify AI quizzes</p>
+            </router-link>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+            <span>Offline-First Sync: <strong class="text-emerald-400">IndexedDB Ready</strong></span>
+            <span>Languages: <strong class="text-white">EN • RW • FR</strong></span>
           </div>
         </div>
       </div>
     </section>
 
-    <template v-if="loggedIn">
-      <section id="about" class="bg-white px-6 py-16 text-slate-900">
-        <div class="mx-auto max-w-7xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-600">About Us</p>
-          <h2 class="mt-3 text-3xl font-bold">A calmer way to move from study mode to admin mode.</h2>
-          <p class="mt-4 max-w-3xl leading-7 text-slate-600">StudySmart keeps students focused first, then reveals the management surface only after the dashboard is opened.</p>
+    <!-- Architecture Strip Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16 space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400">Platform Capability Matrix</span>
+        <h2 class="text-3xl font-black text-white">Full-Stack Scalability & Clean Architecture</h2>
+        <p class="text-xs text-slate-400">Built with Go 1.22 (Gin + GORM), Vue 3 Composition API, PostgreSQL, and Docker containerization.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3">
+          <span class="text-3xl block">⚡</span>
+          <h3 class="text-base font-bold text-white">Module 1: Student Engine</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Eliminates passive learning through bite-sized cards, micro-quizzes, daily flame streaks, Pomodoro focus mode, and step-by-step AI problem explainer.
+          </p>
+          <router-link to="/feed" class="text-xs font-bold text-emerald-400 hover:underline inline-block pt-2">
+            Explore Mind-Feed →
+          </router-link>
         </div>
-      </section>
 
-      <section id="services" class="bg-slate-100 px-6 py-16 text-slate-900">
-        <div class="mx-auto max-w-7xl">
-          <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-600">Services</p>
-              <h2 class="mt-3 text-3xl font-bold">Core management tools</h2>
-            </div>
-            <router-link to="/dashboard" class="inline-flex rounded-md bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">
-              Go to Dashboard
-            </router-link>
-          </div>
-
-          <div class="mt-8">
-            <div v-if="loadingFeatures" class="rounded-md bg-white p-6 text-center text-slate-500">
-              Loading services...
-            </div>
-            <div v-else-if="featuresError" class="rounded-md bg-red-50 p-6 text-center text-red-600">
-              {{ featuresError }}
-            </div>
-            <div v-else class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              <div v-for="item in (features.length ? features : serviceItems)" :key="item.id" class="rounded-md bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                <h3 class="text-lg font-bold text-slate-900">{{ item.title }}</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600">{{ item.description }}</p>
-              </div>
-            </div>
-          </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3">
+          <span class="text-3xl block">🔍</span>
+          <h3 class="text-base font-bold text-white">Module 2: RAG Pipeline</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Automates textbook & exam ingestion, chunk vectorization, LLM quiz generation, and a human-in-the-loop review workbench for teacher verification.
+          </p>
+          <router-link to="/admin" class="text-xs font-bold text-emerald-400 hover:underline inline-block pt-2">
+            Open Verification Workbench →
+          </router-link>
         </div>
-      </section>
-    </template>
 
-    <Transition name="modal-fade">
-      <div v-if="showLoginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur" @click.self="showLoginModal = false">
-        <div class="relative w-full max-w-lg rounded-lg bg-white p-2 shadow-2xl">
-          <button type="button" class="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-900" aria-label="Close login modal" @click="showLoginModal = false">
-            <span class="pi pi-times"></span>
-          </button>
-          <LoginForm />
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3">
+          <span class="text-3xl block">📈</span>
+          <h3 class="text-base font-bold text-white">Modules 3 & 4: Educator & Parent</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            High-density classroom analytics, automated student risk radar alerts, homework assignment builder, and weekly parent accountability digests.
+          </p>
+          <router-link to="/educator" class="text-xs font-bold text-emerald-400 hover:underline inline-block pt-2">
+            View Risk Radar →
+          </router-link>
         </div>
       </div>
-    </Transition>
+    </section>
   </div>
 </template>
 
-<script>
-import auth from '../services/auth'
-import api from '../services/api'
-import LoginForm from '../components/Loginform.vue'
+<script setup>
+import { onMounted } from 'vue'
+import { useAuthStore } from '../stores/auth'
+import { useGamificationStore } from '../stores/gamification'
 
-export default {
-  name: 'HomePage',
-  components: { LoginForm },
-  data() {
-    return {
-      loggedIn: auth.isLoggedIn(),
-      showLoginModal: false,
-      features: [],
-      loadingFeatures: false,
-      featuresError: null,
-      serviceItems: [
-        { id: 'users', title: 'User Management', description: 'Create, review, edit, and remove user records in a focused way.' },
-        { id: 'table', title: 'Data Table', description: 'View and filter user rows with responsive, simple controls.' },
-        { id: 'dashboard', title: 'Dashboard', description: 'Open the management command center with analytics and recent actions.' },
-        { id: 'focus', title: 'Focused Entry', description: 'The splash page stays calm until you choose to sign in.' },
-      ],
-    }
-  },
-  mounted() {
-    window.addEventListener('studySmartAuthChange', this.updateAuthStatus)
-    this.loadHomeItems()
-  },
-  beforeUnmount() {
-    window.removeEventListener('studySmartAuthChange', this.updateAuthStatus)
-  },
-  methods: {
-    async loadHomeItems() {
-      this.loadingFeatures = true
-      this.featuresError = null
-      try {
-        const res = await api.get('homeitems')
-        const items = res?.data?.data ?? res?.data ?? []
-        if (Array.isArray(items)) {
-          this.features = items.map((item, index) => ({
-            id: item.id ?? index,
-            title: item.title || item.name || 'No title',
-            description: item.description || item.summary || '',
-          }))
-        } else {
-          this.features = []
-          this.featuresError = 'Unexpected response shape from homeitems API.'
-        }
-      } catch (err) {
-        this.featuresError = 'Unable to load feature items.'
-        console.error('HomePage loadHomeItems error:', err)
-      } finally {
-        this.loadingFeatures = false
-      }
-    },
-    updateAuthStatus() {
-      this.loggedIn = auth.isLoggedIn()
-      if (this.loggedIn) this.showLoginModal = false
-    }
-  }
-}
+const authStore = useAuthStore()
+const gameStore = useGamificationStore()
+
+onMounted(async () => {
+  await authStore.initAuth()
+  await gameStore.fetchProfile()
+})
 </script>
-
-<style scoped>
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.25s ease;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  opacity: 0;
-}
-</style>

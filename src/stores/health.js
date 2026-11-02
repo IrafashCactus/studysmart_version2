@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import api from './api'
+import api from '../services/api'
 
 export const useHealthStore = defineStore('health', () => {
   const status = ref(null)
@@ -23,3 +23,4 @@ export const useHealthStore = defineStore('health', () => {
 
   return { status, loading, error, fetchHealth }
 })
+

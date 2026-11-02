@@ -7,13 +7,17 @@ const api = axios.create({
   },
 })
 
-function getStoredToken() {
+export function getStoredAuth() {
   try {
-    const stored = localStorage.getItem('studySmartAuth')
-    return stored ? JSON.parse(stored).token : null
+    return JSON.parse(localStorage.getItem('studySmartAuth')) || {}
   } catch (err) {
-    return null
+    return {}
   }
+}
+
+export function getStoredToken() {
+  const auth = getStoredAuth()
+  return auth.token || null
 }
 
 api.interceptors.request.use(
